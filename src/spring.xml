@@ -4,23 +4,29 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="triangle" class="org.sunny.anand.Triangle">
-        <property name="A" ref="firstPoint"/>
-        <property name="B" ref="secondPoint"/>
+        <property name="A" ref="firstPoint">
+            <!-- <idref bean="pointA"/> -->
+        </property>
+        <property name="B">
+            <bean class="org.sunny.anand.Point">
+                <property name="x" value="10"/>
+                <property name="y" value="10"/>
+            </bean>
+        </property>
         <property name="C" ref="thirdPoint"/>
     </bean>
 
-    <bean id="firstPoint" class="org.sunny.anand.Point">
+    <bean id="firstPoint" class="org.sunny.anand.Point" name="pointA">
         <property name="x" value="0"/>
         <property name="y" value="0"/>
     </bean>
 
-    <bean id="secondPoint" class="org.sunny.anand.Point">
-        <property name="x" value="10"/>
-        <property name="y" value="10"/>
-    </bean>
+
 
     <bean id="thirdPoint" class="org.sunny.anand.Point">
         <property name="x" value="-5"/>
         <property name="y" value="-5"/>
     </bean>
+
+    <alias name="triangle" alias="triangle-name"></alias>
 </beans>
