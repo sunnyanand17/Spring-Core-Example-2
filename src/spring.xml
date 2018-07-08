@@ -3,20 +3,23 @@
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="triangle" class="org.sunny.anand.Triangle">
-        <property name="A" ref="firstPoint">
-            <!-- <idref bean="pointA"/> -->
+    <bean id="triangle" class="org.sunny.anand.Triangle" scope="singleton">
+        <property name="points">
+            <list>
+                <ref bean="firstPoint"/>
+                <ref bean="secondPoint"/>
+                <ref bean="thirdPoint"/>
+            </list>
+
         </property>
-        <property name="B">
-            <bean class="org.sunny.anand.Point">
-                <property name="x" value="10"/>
-                <property name="y" value="10"/>
-            </bean>
-        </property>
-        <property name="C" ref="thirdPoint"/>
     </bean>
 
-    <bean id="firstPoint" class="org.sunny.anand.Point" name="pointA">
+
+    <bean id="firstPoint" class="org.sunny.anand.Point">
+        <property name="x" value="10"/>
+        <property name="y" value="10"/>
+    </bean>
+    <bean id="secondPoint" class="org.sunny.anand.Point" name="pointA">
         <property name="x" value="0"/>
         <property name="y" value="0"/>
     </bean>

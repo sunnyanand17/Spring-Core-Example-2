@@ -17,8 +17,21 @@ public class DrawingApp {
 
         //ApplicationContext ctxt =  new FileSystemXmlApplicationContext("spring.xml");
         ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-
         Triangle tr = context.getBean(Triangle.class);
         tr.draw();
+
+        /**
+         * Spring beans has 2 context singleton and prototype and it is defined as below
+         * singleton - only one instance is created per Spring container(default). This happens when the context is
+         *             intialized at runtime using the configuration, does not wait for getBean()
+         * prototype - new bean/instance is created per request or reference, waits for getBean() , so getBean() creates
+         *             the new beans.
+         *webAware - Request scope --> when a new request is happening it will create a new bean for every new getBean()
+         *         - Session scope --> when a new user for a new session it will create a new bean for every new session
+         *         - Global session
+         *
+         *  While Initializing the beans the spring will call any Aware interfaces implemented by the class before
+         *  initializing/creating the beans.
+         */
     }
 }

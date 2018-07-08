@@ -1,38 +1,38 @@
 package org.sunny.anand;
 
-public class Triangle {
-    private Point A;
-    private Point B;
-    private Point C;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanNameAware;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
-    public Point getA() {
-        return A;
+import java.util.List;
+
+public class Triangle implements ApplicationContextAware, BeanNameAware {
+    public ApplicationContext context;
+    private List<Point> points;
+
+    public List<Point> getPoints() {
+        return points;
     }
 
-    public void setA(Point a) {
-        A = a;
+    public void setPoints(List<Point> points) {
+        this.points = points;
     }
-
-    public Point getB() {
-        return B;
-    }
-
-    public void setB(Point b) {
-        B = b;
-    }
-
-    public Point getC() {
-        return C;
-    }
-
-    public void setC(Point c) {
-        C = c;
-    }
-
 
     public void draw() {
-        System.out.println("Point A (" + getA().getX() + " ," + getA().getY() + " )");
-        System.out.println("Point B (" + getB().getX() + " ," + getB().getY() + " )");
-        System.out.println("Point C (" + getC().getX() + " ," + getC().getY() + " )");
+        for (Point point : points) {
+
+            System.out.println("Point (" + point.getX() + " ," + point.getY() + " )");
+        }
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.context = applicationContext;
+    }
+
+    @Override
+    public void setBeanName(String s) {
+        System.out.println("Bean Name is: " + s);
     }
 }
