@@ -2,7 +2,7 @@
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
+    <!--
     <bean id="triangle" class="org.sunny.anand.Triangle" scope="singleton">
         <property name="points">
             <list>
@@ -13,7 +13,27 @@
 
         </property>
     </bean>
+    -->
 
+    <bean id="parenttriangle" class="org.sunny.anand.Triangle">
+        <property name="points">
+            <list>
+                <ref bean="firstPoint"/>
+            </list>
+        </property>
+
+    </bean>
+
+    <bean id="triangle1" class="org.sunny.anand.Triangle" parent="parenttriangle">
+        <property name="points">
+            <list merge="true">
+                <ref bean="secondPoint"/>
+                <ref bean="thirdPoint"/>
+            </list>
+
+        </property>
+
+    </bean>
 
     <bean id="firstPoint" class="org.sunny.anand.Point">
         <property name="x" value="10"/>
@@ -23,13 +43,10 @@
         <property name="x" value="0"/>
         <property name="y" value="0"/>
     </bean>
-
-
-
     <bean id="thirdPoint" class="org.sunny.anand.Point">
         <property name="x" value="-5"/>
         <property name="y" value="-5"/>
     </bean>
 
-    <alias name="triangle" alias="triangle-name"></alias>
+    <!-- <alias name="triangle" alias="triangle-name"></alias> -->
 </beans>

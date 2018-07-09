@@ -17,7 +17,7 @@ public class DrawingApp {
 
         //ApplicationContext ctxt =  new FileSystemXmlApplicationContext("spring.xml");
         ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-        Triangle tr = context.getBean(Triangle.class);
+        Triangle tr = (Triangle) context.getBean("triangle1");// type cast object to type Triangle
         tr.draw();
 
         /**
