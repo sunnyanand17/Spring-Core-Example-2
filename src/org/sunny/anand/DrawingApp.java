@@ -1,6 +1,6 @@
 package org.sunny.anand;
 
-import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class DrawingApp {
@@ -16,7 +16,14 @@ public class DrawingApp {
         //BeanFactory factory = new XmlBeanFactory(new FileSystemResource("spring.xml"));
 
         //ApplicationContext ctxt =  new FileSystemXmlApplicationContext("spring.xml");
-        ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+        /**
+         * Lifecycle Callbacks of Beans
+         * registerShutdownHook method ensures that the spring application sutdowns when the application context exits
+         * AbstratApplicationContext has the registerShutdownHook method which calls the destroy method
+         *
+         */
+        AbstractApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+        context.registerShutdownHook();// registers a shutdown hook when the main method finishes.
         Triangle tr = (Triangle) context.getBean("triangle1");// type cast object to type Triangle
         tr.draw();
 
@@ -33,5 +40,11 @@ public class DrawingApp {
          *  While Initializing the beans the spring will call any Aware interfaces implemented by the class before
          *  initializing/creating the beans.
          */
+        /**
+         *
+         * Bean post processor- used to perform common functionality across all the generated beans for the bean factory
+         */
+
+
     }
 }

@@ -15,7 +15,7 @@
     </bean>
     -->
 
-    <bean id="parenttriangle" class="org.sunny.anand.Triangle">
+    <bean id="parenttriangle" class="org.sunny.anand.Triangle" init-method="myInit" destroy-method="myCleanUp">
         <property name="points">
             <list>
                 <ref bean="firstPoint"/>
@@ -40,13 +40,19 @@
         <property name="y" value="10"/>
     </bean>
     <bean id="secondPoint" class="org.sunny.anand.Point" name="pointA">
-        <property name="x" value="0"/>
-        <property name="y" value="0"/>
+        <property name="x" value="${secondPoint.X}"/>
+        <property name="y" value="${secondPoint.Y}"/>
     </bean>
     <bean id="thirdPoint" class="org.sunny.anand.Point">
         <property name="x" value="-5"/>
         <property name="y" value="-5"/>
     </bean>
+    <!-- a bean postprocessor -->
+    <!--bean  class="org.sunny.anand.DisplayNameBeanPostProcessor" /-->
+    <!--bean class="org.sunny.anand.BeanFactoryPP" /-->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="points.properties"></property>
 
+    </bean>
     <!-- <alias name="triangle" alias="triangle-name"></alias> -->
 </beans>
